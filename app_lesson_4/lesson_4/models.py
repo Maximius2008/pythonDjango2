@@ -14,7 +14,7 @@ class Advertisement(models.Model):
         db_table = 'advertisements'
 
     def __str__(self):
-        return f'Advertisement: Advertisement(id={id}, title=заголовок №1, price=100.00)'
+        return f'Advertisement: Advertisement(id={self.id}, title={self.title}, price={self.price})'
 
 
 
