@@ -14,13 +14,8 @@ class Advertisement(models.Model):
         db_table = 'advertisements'
 
     def __str__(self):
-        return f'Advertisement: Advertisement(id={id}, title=заголовок №1, price=100.00)'
-print(Advertisement())
-'''DecimalField - поле для чисел;
-    CharField - поле для маленьких строк;      
-    TextField - поле для больших строк;
-    BooleanField - да или нет;
-'''
+        return f'Advertisement: Advertisement(id={self.id}, title={self.title}, price={self.price})'
+
 
 
 """
