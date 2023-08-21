@@ -1,11 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from .models import Advertisement
+from .forms import AdvertisementForm
 """from django.http import HttpResponse
 
 def zaglushka(request):
     return HttpResponse('Длмашка по 4 занятию! (у меня пропала папка с урока, так что пришлось делать всё заново)))')"""
 
 def index(request):
-    return render(request, 'index.html')
+    advertisements = Advertisement.objects.all()
+    context = {'advertisements': advertisements}
+    return render(request, 'index.html', context)
 
 def top_sellers(request):
     return render(request, 'top-sellers.html')
+
+def advertisement_post(request):
+    if request.method == 'POST':
+        form = AdvertisementForm(request.POST, request.FILES)
+        if form.is_valid():
+            advertisement = Advertisement(**form.cleaned_data)
+            advertisement.user = request.user
+            advertisement.save()
+            return redirect(reverse('main-page'))
+
+    else:
+        form = AdvertisementForm()
+    context = {'form': form}
+    return render(request, 'advertisement-post.html', context)
